@@ -1,0 +1,6 @@
+flake8
+loguru
+pandas
+psycopg2-binary
+pytest
+sqlalchemy

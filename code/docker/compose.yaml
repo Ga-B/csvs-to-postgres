@@ -1,0 +1,44 @@
+name: csvs2postgres
+
+services:
+  postgres:
+    image: postgres
+    container_name: pg_server_csvs2postgres
+    restart: unless-stopped
+    shm_size: '128mb'
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: imported_csvs
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: bind
+        source: ../../data/postgres
+        target: /var/lib/postgresql/data
+    networks:
+      - bridge_network
+
+  jupyter:
+    build: ./jupyter
+    container_name: jupyter_server_csvs2postgres
+    user: root
+    environment:
+      - GRANT_SUDO=yes
+      - JUPYTER_TOKEN=custom_token
+    volumes:
+      - type: bind
+        source: ~/csvs-to-postgres/data/csvs
+        target: /home/jovyan/data  # CSV files
+      - type: bind
+        source: ../python
+        target: /home/jovyan/code  # Python scripts
+    ports:
+      - "8888:8888"
+    networks:
+      - bridge_network
+    depends_on:
+      - postgres
+
+networks:
+  bridge_network:
+    driver: bridge
