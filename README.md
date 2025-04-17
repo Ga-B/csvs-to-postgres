@@ -38,13 +38,13 @@ A bridge network is created to connect the two containers.
 
 Below, it wil be assumed that the project folder is localed inside the user's Home directory. If that is not the case, adjust the path in the commands below accordingly, and tailor the file `csvs-to-postgres/code/docker/compose.yaml` by updating the path in the line `source: ~/csvs-to-postgres/data/csvs/`.
 
-### 1. CSVs preparation
-
-CSVs to be imported should be placed inside the project's directory `~/csvs-to-postgres/data/csvs/`. You can also use symlinks to point the directory to the original files without moving them.
-
-### 2. Container initialization
+### 1. Container initialization
 
 Open a terminal pointing to the project's directory `~/csvs-to-postgres/code/docker/` and send the command `make up`. This will set everything up.
+
+### 2. CSVs preparation
+
+CSVs to be imported should be placed inside the project's directory `~/csvs-to-postgres/data/csvs/`. You can also use symlinks to point the directory to the original files without moving them. This directory is automatically created when the container is initialized, but can be set up beforehand with the CSV files inside. It won't be overwritten if it is created manually.
 
 ### 3. Importing into Postgres database using Python
 1. Once Docker finishes setting up all services, navigate to the JupyterLab server at `http://localhost:8888/lab?token=custom_token`.

@@ -15,6 +15,8 @@ services:
       - type: bind
         source: ../../data/postgres
         target: /var/lib/postgresql/data
+        bind:
+          create_host_path: true
     networks:
       - bridge_network
 
@@ -29,6 +31,8 @@ services:
       - type: bind
         source: ~/csvs-to-postgres/data/csvs
         target: /home/jovyan/data  # CSV files
+        bind:
+          create_host_path: true
       - type: bind
         source: ../python
         target: /home/jovyan/code  # Python scripts
