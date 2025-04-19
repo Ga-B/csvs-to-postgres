@@ -29,7 +29,7 @@ services:
       - JUPYTER_TOKEN=custom_token
     volumes:
       - type: bind
-        source: ../data/csvs
+        source: ../../data/csvs
         target: /home/jovyan/data  # CSV files
         bind:
           create_host_path: true
